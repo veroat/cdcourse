@@ -1,0 +1,14 @@
+- hosts: localhost
+  tasks:
+  - name: ensure docker is at the latest version
+    yum: name=docker state=latest
+    become: yes
+  - name: adding group
+    user: 
+        name: ec2-user 
+        groups: docker 
+        append: yes 
+    become: yes 
+  - name: start service
+    become: yes
+    service: name=docker state=started
